@@ -30,111 +30,145 @@ const allTags = computed(() => {
 
 <template>
   <UContainer class="py-8 px-4">
-    <!-- Header section with nice gradient background -->
-    <UCard class="mb-8 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-gray-800 dark:to-gray-900">
-      <div class="text-center py-4">
-        <h1 class="text-3xl font-extrabold mb-2 text-primary-600 dark:text-primary-400">Traffic Tools</h1>
-        <p class="text-gray-600 dark:text-gray-300">Discover and utilize our collection of traffic analysis tools</p>
+    <!-- Header Section -->
+    <UCard
+      class="mb-8"
+      :ui="{
+        background: 'bg-gradient-to-r from-primary-50 to-primary-100 dark:from-gray-900 dark:to-gray-950', // Adjusted dark gradient slightly
+        body: { padding: 'p-0 sm:p-0' } // Remove base padding if using inner div
+      }"
+    >
+      <div class="text-center py-6 px-4 sm:px-6">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+          Traffic Tools
+        </h1>
+        <p class="mt-2 text-lg leading-8 text-gray-600 dark:text-gray-300">
+          Discover and utilize our collection of traffic analysis tools.
+        </p>
       </div>
     </UCard>
-    
-    <!-- Tag Filter in a nice card -->
+
+    <!-- Tag Filter Card -->
     <UCard class="mb-8">
       <template #header>
-        <div class="flex items-center">
-          <h2 class="text-lg font-medium">Filter by Tags</h2>
-        </div>
+        <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+          Filter by Tags
+        </h3>
       </template>
-      <div class="flex gap-2 flex-wrap">
-        <!-- Fixed filter buttons using UButton instead of UChip -->
-        <UButton 
-          v-for="tag in allTags" 
+      <div class="flex flex-wrap gap-2">
+        <UButton
+          v-for="tag in allTags"
           :key="tag"
           :label="tag"
           :color="activeTag === tag ? 'primary' : 'gray'"
-          :variant="activeTag === tag ? 'soft' : 'ghost'"
+          :variant="activeTag === tag ? 'solid' : 'outline'"
           size="sm"
           @click="activeTag = activeTag === tag ? null : tag"
+        />
+         <UButton
+          v-if="activeTag"
+          icon="i-heroicons-x-mark-20-solid"
+          color="gray"
+          variant="ghost"
+          size="sm"
+          aria-label="Clear filter"
+          @click="activeTag = null"
         />
       </div>
     </UCard>
 
-    <!-- Tools Grid with improved styling -->
+    <!-- Tools Grid Section -->
     <div v-if="filteredTools && filteredTools.length">
-      <UDivider class="my-6" label="Available Tools" />
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <UDivider label="Available Tools" class="my-6" />
+
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Tool Card -->
         <UCard
           v-for="tool in filteredTools"
           :key="tool.path"
-          class="h-full transition-all hover:shadow-lg"
-          :ui="{ body: { padding: 'p-4' }, header: { padding: 'pb-0 px-4 pt-4' } }"
+          class="flex flex-col"
+          :ui="{
+            base: 'h-full hover:ring-1 hover:ring-primary-500 dark:hover:ring-primary-400 transition-shadow hover:shadow-md',
+            body: { padding: 'p-4', base: 'flex-grow' }, // Makes body take available space
+            header: { padding: 'p-4 pb-0' },
+            footer: { padding: 'p-4 pt-0' }
+          }"
         >
           <template #header>
-            <NuxtLink :to="tool.path" class="no-underline">
-              <div class="pb-3 border-b border-gray-100 dark:border-gray-800">
-                <h2 class="text-xl font-semibold text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300">
-                  {{ tool.title }}
-                </h2>
-              </div>
+            <NuxtLink :to="tool.path" class="focus:outline-none">
+              <h3 class="text-lg font-semibold leading-6 text-gray-900 dark:text-white truncate hover:text-primary-600 dark:hover:text-primary-400">
+                {{ tool.title }}
+              </h3>
             </NuxtLink>
+            <UDivider class="mt-3 mb-0" />
           </template>
 
-          <div class="space-y-4 pt-2">
-            <!-- Tool image if available -->
-            <div v-if="tool.image" class="aspect-video rounded-md overflow-hidden">
-              <img :src="tool.image" :alt="tool.title" class="w-full h-full object-cover">
-            </div>
-            
-            <p class="text-gray-700 dark:text-gray-300">{{ tool.description }}</p>
-            
-            <div v-if="tool.tags && tool.tags.length" class="flex gap-1.5 flex-wrap">
+          <!-- Card Body Content -->
+          <div class="space-y-3">
+             <!-- Image -->
+             <div v-if="tool.image" class="aspect-video -mx-4 -mt-4 mb-3 overflow-hidden rounded-t-md">
+               <img
+                 :src="tool.image"
+                 :alt="`Preview of ${tool.title}`"
+                 class="w-full h-full object-cover"
+                 loading="lazy"
+               >
+             </div>
+            <!-- Description -->
+            <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
+              {{ tool.description }}
+            </p>
+            <!-- Tags -->
+            <div v-if="tool.tags && tool.tags.length" class="flex flex-wrap gap-1.5">
               <UBadge
                 v-for="tag in tool.tags"
                 :key="tag"
                 variant="subtle"
                 color="gray"
                 size="xs"
-                class="font-normal"
+                class="font-medium"
               >
                 {{ tag }}
               </UBadge>
             </div>
           </div>
-          
+
           <template #footer>
-            <NuxtLink :to="tool.path" class="no-underline">
-              <UButton
-                color="primary"
-                variant="ghost"
-                icon="i-heroicons-arrow-right"
-                trailing
-                block
-              >
-                Explore Tool
-              </UButton>
-            </NuxtLink>
+             <!-- Explore Button -->
+             <div class="mt-auto pt-4"> <!-- Push footer content down -->
+              <NuxtLink :to="tool.path" class="focus:outline-none">
+                <UButton
+                  label="Explore Tool"
+                  color="primary"
+                  variant="link"
+                  icon="i-heroicons-arrow-right-20-solid"
+                  trailing
+                  :padded="false"
+                />
+              </NuxtLink>
+            </div>
           </template>
         </UCard>
       </div>
     </div>
-    
-    <!-- Empty state with illustration -->
+
+    <!-- Empty State -->
     <div v-else class="text-center py-12">
-      <UIcon name="i-heroicons-folder-open" class="text-gray-400 mx-auto h-16 w-16 mb-4" />
-      <h3 class="text-xl font-medium text-gray-700 dark:text-gray-300 mb-2">No tools found</h3>
-      <p class="text-gray-500 dark:text-gray-400">
-        Try selecting a different tag or clear your filter
+      <UIcon name="i-heroicons-circle-stack" class="mx-auto size-12 text-gray-400 dark:text-gray-500" aria-hidden="true" />
+      <h3 class="mt-2 text-sm font-semibold text-gray-900 dark:text-white">
+        No tools found
+      </h3>
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+        No tools match the selected tag "{{ activeTag }}".
       </p>
-      <UButton 
-        v-if="activeTag" 
-        color="gray" 
-        variant="soft" 
-        class="mt-4"
-        @click="activeTag = null"
-      >
-        Clear Filter
-      </UButton>
+      <div class="mt-6">
+        <UButton
+          color="white"
+          variant="solid"
+          label="Clear Filter"
+          @click="activeTag = null"
+        />
+      </div>
     </div>
   </UContainer>
 </template>

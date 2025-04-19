@@ -2,9 +2,9 @@
 title: "Traffic Analyzer"
 description: "Visualize and analyze real-time traffic flow with interactive charts and heatmaps."
 tags:
-  - analytics
-  - visualization
-  - real-time
+  - navigation
+  - optimization
+  - efficiency
 ---
 # Traffic Analyzer
 

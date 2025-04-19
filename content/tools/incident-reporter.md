@@ -2,9 +2,9 @@
 title: "Incident Reporter"
 description: "Easily report and track traffic incidents to keep your community informed."
 tags:
-  - reporting
-  - safety
-  - community
+  - example
+  - traffic
+  - utility
 ---
 # Incident Reporter
 
