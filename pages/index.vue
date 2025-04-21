@@ -79,7 +79,6 @@ const allTags = computed(() => {
 
     <!-- Tools Grid Section -->
     <div v-if="filteredTools && filteredTools.length">
-      <UDivider label="Available Tools" class="my-6" />
 
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <!-- Tool Card -->
@@ -100,7 +99,6 @@ const allTags = computed(() => {
                 {{ tool.title }}
               </h3>
             </NuxtLink>
-            <UDivider class="mt-3 mb-0" />
           </template>
 
           <!-- Card Body Content -->
