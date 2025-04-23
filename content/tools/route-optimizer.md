@@ -5,6 +5,11 @@ tags:
   - navigation
   - optimization
   - efficiency
+ogImage:
+    title: "Route Optimizer"
+    description: "Find the fastest and most efficient routes"
+    headline: Elish Team
+  
 ---
 # Route Optimizer
 

@@ -5,6 +5,10 @@ tags:
   - navigation
   - optimization
   - efficiency
+ogImage:
+    title: "Traffic Analyzer"
+    description: "Visualize and analyze real-time traffic flow"
+    headline: Elish Team
 ---
 # Traffic Analyzer
 

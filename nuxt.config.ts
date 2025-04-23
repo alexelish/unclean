@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
+    '@nuxtjs/seo',
     '@nuxt/content',
     '@nuxt/eslint',
     '@nuxt/fonts',

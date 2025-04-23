@@ -5,6 +5,10 @@ tags:
   - example
   - traffic
   - utility
+ogImage:
+    title: "Incident Reporter"
+    description: "Easily report and track traffic incidents."
+    headline: Elish Team
 ---
 # Incident Reporter
 

@@ -1,4 +1,12 @@
 <script setup lang="ts">
+defineOgImageComponent('NuxtSeo', {
+  title: 'Traffic Tools Directory 👋',
+  description: 'Elish Team - Kick-ass developers with Webflow And Nuxt',
+  headline: 'Elish Team',
+  theme: '#ff0000',
+  colorMode: 'dark',
+})
+
 // Get all tools with selected fields
 const { data: tools } = await useAsyncData('tools-list', () => {
   return queryCollection('tools')
@@ -7,15 +15,18 @@ const { data: tools } = await useAsyncData('tools-list', () => {
 })
 
 // State for active tag filter
-const activeTag = useState('active-tag', () => null)
+const activeTag = useState<string | null>('active-tag', () => null)
 
-// Filter tools by active tag
+// Filter tools by active tag - no errors by Alex and GPT
 const filteredTools = computed(() => {
   if (!tools.value) return []
-  if (!activeTag.value) return tools.value
+
+  const tag = activeTag.value
+  if (!tag) return tools.value
+
   return tools.value.filter(tool =>
-    tool.tags?.includes(activeTag.value)
-  ) || []
+    tool.tags?.includes(tag)
+  )
 })
 
 // Get all unique tags from tools
@@ -29,24 +40,27 @@ const allTags = computed(() => {
 </script>
 
 <template>
-  <UContainer class="py-8 px-4">
+  <UContainer class="text-center py-8 px-4">
     <!-- Header Section -->
-    <UCard
-      class="mb-8"
-      :ui="{
-        background: 'bg-gradient-to-r from-primary-50 to-primary-100 dark:from-gray-900 dark:to-gray-950', // Adjusted dark gradient slightly
-        body: { padding: 'p-0 sm:p-0' } // Remove base padding if using inner div
-      }"
-    >
-      <div class="text-center py-6 px-4 sm:px-6">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-          Traffic Tools
+    <UCard>
+    <template #header>
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+          Traffic Tools Directory by Elish Team
         </h1>
+    </template>
+    <div class="text-center py-6 px-4 sm:px-6">
+        
         <p class="mt-2 text-lg leading-8 text-gray-600 dark:text-gray-300">
-          Discover and utilize our collection of traffic analysis tools.
+          Discover our collection of big-moneys-ROI, website-leads-getting-getting tools. And build your next project with Elish team.
         </p>
       </div>
-    </UCard>
+
+    <template #footer>
+      <p class="text-center font-bold tracking-tight text-gray-100 dark:text-white sm:text-xl">
+          Or Alex will haunt your dreams!
+      </p>
+    </template>
+  </UCard>
 
     <!-- Tag Filter Card -->
     <UCard class="mb-8">
@@ -57,21 +71,21 @@ const allTags = computed(() => {
       </template>
       <div class="flex flex-wrap gap-2">
         <UButton
-          v-for="tag in allTags"
-          :key="tag"
-          :label="tag"
-          :color="activeTag === tag ? 'primary' : 'gray'"
-          :variant="activeTag === tag ? 'solid' : 'outline'"
-          size="sm"
-          @click="activeTag = activeTag === tag ? null : tag"
-        />
+        v-for="tag in allTags"
+        :key="tag"
+        :label="tag"
+        :color="activeTag === tag ? 'secondary' : undefined"
+        :variant="activeTag === tag ? 'outline' : undefined"
+        size="md"
+        @click="activeTag = activeTag === tag ? null : tag"
+/>
          <UButton
           v-if="activeTag"
           icon="i-heroicons-x-mark-20-solid"
-          color="gray"
-          variant="ghost"
-          size="sm"
-          aria-label="Clear filter"
+          size="md"
+          color="secondary"
+          variant="outline"
+          label="Clear filter"
           @click="activeTag = null"
         />
       </div>
@@ -87,11 +101,10 @@ const allTags = computed(() => {
           :key="tool.path"
           class="flex flex-col"
           :ui="{
-            base: 'h-full hover:ring-1 hover:ring-primary-500 dark:hover:ring-primary-400 transition-shadow hover:shadow-md',
-            body: { padding: 'p-4', base: 'flex-grow' }, // Makes body take available space
-            header: { padding: 'p-4 pb-0' },
-            footer: { padding: 'p-4 pt-0' }
-          }"
+            body: 'p-4 flex-grow',
+            header: 'p-4 pb-0',
+            footer: 'p-4 pt-0'
+            }"
         >
           <template #header>
             <NuxtLink :to="tool.path" class="focus:outline-none">
@@ -122,7 +135,7 @@ const allTags = computed(() => {
                 v-for="tag in tool.tags"
                 :key="tag"
                 variant="subtle"
-                color="gray"
+                color="secondary"
                 size="xs"
                 class="font-medium"
               >
@@ -161,7 +174,7 @@ const allTags = computed(() => {
       </p>
       <div class="mt-6">
         <UButton
-          color="white"
+          color="secondary"
           variant="solid"
           label="Clear Filter"
           @click="activeTag = null"

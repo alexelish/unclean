@@ -105,14 +105,8 @@ export default defineAppConfig({
           false: {
             link: 'text-(--ui-text-muted)',
             linkLeadingIcon: 'text-(--ui-text-dimmed)',
-            childLink: [
-              'hover:bg-(--ui-bg-elevated)/50 text-(--ui-text) hover:text-(--ui-text-highlighted)',
-              'transition-colors'
-            ],
-            childLinkIcon: [
-              'text-(--ui-text-dimmed) group-hover:text-(--ui-text)',
-              'transition-colors'
-            ]
+            childLink:'hover:bg-(--ui-bg-elevated)/50 text-(--ui-text) hover:text-(--ui-text-highlighted)',
+            childLinkIcon: 'text-(--ui-text-dimmed) group-hover:text-(--ui-text)'
           }
         },
         disabled: {
@@ -150,10 +144,7 @@ export default defineAppConfig({
           orientation: 'horizontal',
           highlight: true,
           class: {
-            link: [
-              'after:absolute after:-bottom-2 after:inset-x-2.5 after:block after:h-px after:rounded-full',
-              'after:transition-colors'
-            ]
+            link: 'after:absolute after:-bottom-2 after:inset-x-2.5 after:block after:h-px after:rounded-full'
           }
         },
         {
@@ -161,10 +152,7 @@ export default defineAppConfig({
           highlight: true,
           level: true,
           class: {
-            link: [
-              'after:absolute after:-start-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full',
-              'after:transition-colors'
-            ]
+            link: 'after:absolute after:-start-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full'
           }
         },
         {
@@ -172,14 +160,8 @@ export default defineAppConfig({
           active: false,
           variant: 'pill',
           class: {
-            link: [
-              'hover:text-(--ui-text-highlighted) hover:before:bg-(--ui-bg-elevated)/50',
-              'transition-colors before:transition-colors'
-            ],
-            linkLeadingIcon: [
-              'group-hover:text-(--ui-text)',
-              'transition-colors'
-            ]
+            link: 'hover:text-(--ui-text-highlighted) hover:before:bg-(--ui-bg-elevated)/50',
+            linkLeadingIcon: 'group-hover:text-(--ui-text)'
           }
         },
         {
@@ -242,10 +224,7 @@ export default defineAppConfig({
           active: true,
           highlight: true,
           class: {
-            link: [
-              'hover:before:bg-(--ui-bg-elevated)/50',
-              'before:transition-colors'
-            ]
+            link: 'hover:before:bg-(--ui-bg-elevated)/50'
           }
         },
         {
@@ -253,14 +232,8 @@ export default defineAppConfig({
           active: false,
           variant: 'link',
           class: {
-            link: [
-              'hover:text-(--ui-text-highlighted)',
-              'transition-colors'
-            ],
-            linkLeadingIcon: [
-              'group-hover:text-(--ui-text)',
-              'transition-colors'
-            ]
+            link: 'hover:text-(--ui-text-highlighted)',
+            linkLeadingIcon: 'group-hover:text-(--ui-text)'
           }
         },
         {
@@ -331,5 +304,11 @@ export default defineAppConfig({
         variant: 'pill'
       }
     }
+  },
+  site: {
+    url: 'http://localhost:3000/',
+    name: 'Elish Team - Traffic Tools directory',
+    description: 'traffic tools website by Elish Team!',
+    defaultLocale: 'en', // not needed if you have @nuxtjs/i18n installed
   }
 })
