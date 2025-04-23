@@ -104,7 +104,12 @@ const items = ref<NavigationMenuItem[]>([
 
 <template>
   <UApp>
-  <UNavigationMenu trailing-icon="i-lucide-arrow-down" :items="items" class="w-1/2 mx-auto flex justify-center" />
-  <NuxtPage />
+    <div class="flex items-center justify-center w-full mx-auto">
+      <UNavigationMenu trailing-icon="i-lucide-arrow-down" :items="items" class="w-1/2 flex justify-center" />
+      <div class="ml-4"> <!-- Add space between the menu and the color switch -->
+        <UColorModeSwitch />
+      </div>
+    </div>
+    <NuxtPage />
   </UApp>
 </template>
