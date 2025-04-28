@@ -116,14 +116,12 @@ const allTags = computed(() => {
 
           <!-- Card Body Content -->
           <div class="space-y-3">
-             <!-- Image -->
-             <div v-if="tool.image" class="aspect-video -mx-4 -mt-4 mb-3 overflow-hidden rounded-t-md">
-               <img
-                 :src="tool.image"
-                 :alt="`Preview of ${tool.title}`"
-                 class="w-full h-full object-cover"
-                 loading="lazy"
-               >
+          <!-- Image -->
+          <div v-if="tool.image" class="aspect-video -mx-4 -mt-4 mb-3 overflow-hidden rounded-t-md">
+            <NuxtPicture
+              :src="tool.image"
+              :alt="`Image for ${tool.title}`"
+            />
              </div>
             <!-- Description -->
             <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">

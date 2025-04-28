@@ -15,5 +15,8 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   ui: {
     colorMode: true
+  },
+  image: {
+    format: ['avif', 'webp']
   }
 })

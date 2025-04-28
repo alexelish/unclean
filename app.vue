@@ -107,7 +107,7 @@ const items = ref<NavigationMenuItem[]>([
     <div class="flex items-center justify-center w-full mx-auto">
       <UNavigationMenu trailing-icon="i-lucide-arrow-down" :items="items" class="w-1/2 flex justify-center" />
       <div class="ml-4"> <!-- Add space between the menu and the color switch -->
-        <UColorModeSwitch />
+        <UColorModeSelect />
       </div>
     </div>
     <NuxtPage />
